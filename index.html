@@ -844,6 +844,101 @@
       font-weight: 500;
     }
 
+    /* ========== BLOG ========== */
+    .blog {
+      background: var(--white);
+    }
+
+    .blog-description {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .blog-description p {
+      font-size: 16px;
+      color: var(--gray-text);
+      line-height: 2;
+    }
+
+    .blog-card {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--yellow-pale);
+      border: 2px solid rgba(232, 118, 10, 0.15);
+      border-radius: 16px;
+      padding: 32px 36px;
+      text-decoration: none;
+      color: var(--black);
+      transition: all 0.3s ease;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(232, 118, 10, 0.15);
+      border-color: var(--orange);
+    }
+
+    .blog-card-icon {
+      font-size: 40px;
+      flex-shrink: 0;
+    }
+
+    .blog-card-info {
+      flex: 1;
+    }
+
+    .blog-card-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .blog-card-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .blog-card-url {
+      font-size: 13px;
+      color: var(--gray-text);
+    }
+
+    .blog-card-arrow {
+      font-size: 24px;
+      color: var(--orange);
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .blog-card:hover .blog-card-arrow {
+      transform: translateX(6px);
+    }
+
+    @media (max-width: 768px) {
+      .blog-card {
+        padding: 24px 20px;
+        gap: 16px;
+      }
+
+      .blog-card-title {
+        font-size: 16px;
+      }
+
+      .blog-description p {
+        font-size: 15px;
+        text-align: left;
+      }
+    }
+
     /* ========== CONTACT ========== */
     .contact {
       background: linear-gradient(135deg, var(--orange), var(--orange-light));
@@ -1099,6 +1194,7 @@
         <a href="#strength">STRENGTH</a>
         <a href="#ceo">CEO</a>
         <a href="#news">NEWS</a>
+        <a href="#blog">BLOG</a>
         <a href="#contact" class="nav-contact">CONTACT</a>
       </nav>
       <div class="hamburger" id="hamburger" onclick="toggleNav()">
@@ -1281,6 +1377,30 @@
     </div>
   </section>
 
+  <!-- ========== BLOG ========== -->
+  <section class="blog" id="blog">
+    <div class="section-inner">
+      <div class="section-title fade-in">
+        <span class="en">BLOG</span>
+        <h2>代表のブログ</h2>
+      </div>
+      <div class="blog-content fade-in">
+        <div class="blog-description">
+          <p>代表の神田が、マーケティング・AI・経営に関するノウハウや考えを発信しています。<br>地方の中小企業が今すぐ使える実践的な情報をお届けします。</p>
+        </div>
+        <a href="https://note.com/kandajinden" target="_blank" rel="noopener" class="blog-card">
+          <div class="blog-card-icon">📝</div>
+          <div class="blog-card-info">
+            <div class="blog-card-label">note</div>
+            <div class="blog-card-title">Harunori Jinden｜神田 治典</div>
+            <div class="blog-card-url">note.com/kandajinden</div>
+          </div>
+          <div class="blog-card-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== CONTACT ========== -->
   <section class="contact" id="contact">
     <div class="section-inner">
@@ -1308,6 +1428,7 @@
         <a href="#strength">STRENGTH</a>
         <a href="#ceo">CEO</a>
         <a href="#news">NEWS</a>
+        <a href="#blog">BLOG</a>
         <a href="#contact">CONTACT</a>
       </div>
     </div>
