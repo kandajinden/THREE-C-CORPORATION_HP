@@ -189,6 +189,10 @@
       letter-spacing: 0.02em;
     }
 
+    .hero-text .catch br.pc-only {
+      display: none;
+    }
+
     .hero-text .catch .highlight {
       background: linear-gradient(transparent 60%, var(--yellow) 60%);
       padding: 0 4px;
@@ -939,25 +943,29 @@
       }
 
       .hero-inner {
-        padding-top: 100px;
-        padding-bottom: 40px;
+        padding-top: 80px;
+        padding-bottom: 24px;
       }
 
       .hero-text .catch {
         font-size: 26px;
       }
 
+      .hero-text .catch br.pc-only {
+        display: none;
+      }
+
       .hero-text .sub-catch {
         font-size: 14px;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
       }
 
       .hero-fv {
-        margin-top: 30px;
+        margin-top: 20px;
       }
 
       .hero-fv img {
-        max-width: 320px;
+        max-width: 300px;
       }
 
       .btn-secondary {
@@ -1092,7 +1100,7 @@
       <div class="hero-text">
         <h1 class="catch">
           <span class="highlight">AI</span><span class="orange">×</span><span class="highlight">マーケティング</span>で<br>
-          地方の中小企業に<span class="orange">革命</span>を
+          地方の中小企業に<br class="pc-only"><span class="orange">革命</span>を
         </h1>
         <p class="sub-catch">日本最先端のAIを活用して、あなたの会社の業務課題を解決します。</p>
         <div class="hero-buttons">
