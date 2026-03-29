@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | 株式会社THREE-C CORPORATION</title>
+  <meta name="description" content="株式会社THREE-C CORPORATIONへのお問い合わせはこちらのフォームからお気軽にどうぞ。">
+  <link rel="icon" href="images/Logo_1.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --yellow: #FFD200;
+      --orange: #E8760A;
+      --orange-light: #FF9B3E;
+      --yellow-light: #FFF3B0;
+      --yellow-pale: #FFFBE6;
+      --black: #1A1A1A;
+      --white: #FFFFFF;
+      --gray: #F5F5F5;
+      --gray-text: #666666;
+      --red: #E53935;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      color: var(--black);
+      line-height: 1.8;
+      background: var(--gray);
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 45px;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.3s ease;
+    }
+
+    .back-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ========== MAIN ========== */
+    .contact-page {
+      padding: 120px 20px 80px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .contact-header .en {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .contact-header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .contact-header p {
+      font-size: 15px;
+      color: var(--gray-text);
+      line-height: 1.9;
+    }
+
+    /* ========== FORM ========== */
+    .contact-form-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 48px 44px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .required {
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--red);
+      color: var(--white);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .optional {
+      font-size: 11px;
+      font-weight: 700;
+      background: #ccc;
+      color: var(--white);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--black);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232, 118, 10, 0.1);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: #bbb;
+    }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: pointer;
+    }
+
+    .form-textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    .form-note {
+      font-size: 13px;
+      color: var(--gray-text);
+      margin-top: 6px;
+    }
+
+    /* Privacy */
+    .privacy-check {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 20px;
+      background: var(--gray);
+      border-radius: 12px;
+    }
+
+    .privacy-check label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .privacy-check input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--orange);
+      cursor: pointer;
+    }
+
+    .privacy-check a {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* Submit Button */
+    .form-submit {
+      display: block;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      padding: 18px;
+      font-size: 17px;
+      font-weight: 900;
+      font-family: 'Zen Kaku Gothic New', sans-serif;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(232, 118, 10, 0.35);
+      letter-spacing: 0.05em;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(232, 118, 10, 0.45);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Status Messages */
+    .form-status {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 700;
+      display: none;
+    }
+
+    .form-status.success {
+      color: #2E7D32;
+      display: block;
+    }
+
+    .form-status.error {
+      color: var(--red);
+      display: block;
+    }
+
+    .form-status.sending {
+      color: var(--orange);
+      display: block;
+    }
+
+    /* ========== COMPANY INFO ========== */
+    .contact-info {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .contact-info-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .contact-info-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-info-card p {
+      font-size: 14px;
+      color: var(--gray-text);
+      line-height: 2;
+    }
+
+    .contact-info-card a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 30px;
+      text-align: center;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #666;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .contact-page {
+        padding: 100px 16px 60px;
+      }
+
+      .contact-form-card {
+        padding: 32px 20px;
+      }
+
+      .contact-header h1 {
+        font-size: 24px;
+      }
+
+      .form-submit {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/Text+Logo_1.png" alt="THREE-C CORPORATION">
+      </a>
+      <a href="index.html" class="back-link">← TOPに戻る</a>
+    </div>
+  </header>
+
+  <!-- ========== CONTACT FORM ========== -->
+  <main class="contact-page">
+    <div class="contact-header">
+      <span class="en">CONTACT</span>
+      <h1>お問い合わせ</h1>
+      <p>サービスに関するご質問・ご相談は、下記フォームよりお気軽にお問い合わせください。<br>内容を確認のうえ、2営業日以内にご返信いたします。</p>
+    </div>
+
+    <div class="contact-form-card">
+      <form id="contactForm">
+        <!-- お問い合わせ種別 -->
+        <div class="form-group">
+          <label class="form-label">
+            お問い合わせ種別
+            <span class="required">必須</span>
+          </label>
+          <select class="form-select" name="inquiry_type" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="マーケティング支援について">マーケティング支援について</option>
+            <option value="AI導入支援について">AI導入支援について</option>
+            <option value="お見積りのご依頼">お見積りのご依頼</option>
+            <option value="協業・パートナーシップ">協業・パートナーシップ</option>
+            <option value="採用について">採用について</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+
+        <!-- 会社名 -->
+        <div class="form-group">
+          <label class="form-label">
+            会社名 / 団体名
+            <span class="optional">任意</span>
+          </label>
+          <input type="text" class="form-input" name="company" placeholder="例：株式会社〇〇">
+        </div>
+
+        <!-- お名前 -->
+        <div class="form-group">
+          <label class="form-label">
+            お名前
+            <span class="required">必須</span>
+          </label>
+          <input type="text" class="form-input" name="name" placeholder="例：山田 太郎" required>
+        </div>
+
+        <!-- メールアドレス -->
+        <div class="form-group">
+          <label class="form-label">
+            メールアドレス
+            <span class="required">必須</span>
+          </label>
+          <input type="email" class="form-input" name="email" placeholder="例：info@example.com" required>
+        </div>
+
+        <!-- 電話番号 -->
+        <div class="form-group">
+          <label class="form-label">
+            電話番号
+            <span class="optional">任意</span>
+          </label>
+          <input type="tel" class="form-input" name="phone" placeholder="例：080-1234-5678">
+        </div>
+
+        <!-- お問い合わせ内容 -->
+        <div class="form-group">
+          <label class="form-label">
+            お問い合わせ内容
+            <span class="required">必須</span>
+          </label>
+          <textarea class="form-textarea" name="message" placeholder="お問い合わせ内容をご記入ください" required></textarea>
+        </div>
+
+        <!-- 個人情報同意 -->
+        <div class="privacy-check">
+          <label>
+            <input type="checkbox" id="privacyCheck" required>
+            個人情報の取り扱いに同意する
+          </label>
+        </div>
+
+        <!-- 送信ボタン -->
+        <button type="submit" class="form-submit" id="submitBtn">送信する</button>
+
+        <!-- ステータスメッセージ -->
+        <div id="formStatus" class="form-status"></div>
+      </form>
+    </div>
+
+    <!-- 会社情報 -->
+    <div class="contact-info">
+      <div class="contact-info-card">
+        <h3>直接のお問い合わせ</h3>
+        <p>
+          株式会社THREE-C CORPORATION<br>
+          代表取締役：神田 治典（Jinden Harunori）<br>
+          メール：<a href="mailto:kandajinden@gmail.com">kandajinden@gmail.com</a><br>
+          電話：<a href="tel:08063475870">080-6347-5870</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <p class="footer-copy">&copy; 2026 THREE-C CORPORATION. All Rights Reserved.</p>
+  </footer>
+
+  <!-- ========== EmailJS ========== -->
+  <script>
+    // EmailJSの初期化（★ここにPublic Keyを入れる）
+    emailjs.init("YOUR_PUBLIC_KEY");
+
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // バリデーション
+      if (!document.getElementById('privacyCheck').checked) {
+        formStatus.textContent = '個人情報の取り扱いへの同意が必要です。';
+        formStatus.className = 'form-status error';
+        return;
+      }
+
+      // 送信中の表示
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+      formStatus.textContent = '送信しています...';
+      formStatus.className = 'form-status sending';
+
+      // フォームデータ取得
+      const formData = {
+        inquiry_type: form.inquiry_type.value,
+        company: form.company.value || '（未記入）',
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value || '（未記入）',
+        message: form.message.value
+      };
+
+      // 1. 管理者への通知メール送信（★ template_notification を設定）
+      emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_NOTIFICATION", formData)
+        .then(function() {
+          // 2. お客様への自動返信メール送信（★ template_autoreply を設定）
+          return emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_AUTOREPLY", formData);
+        })
+        .then(function() {
+          // 送信成功
+          formStatus.textContent = 'お問い合わせを送信しました。確認メールをお送りしましたのでご確認ください。';
+          formStatus.className = 'form-status success';
+          form.reset();
+          submitBtn.textContent = '送信完了';
+        })
+        .catch(function(error) {
+          // 送信失敗
+          console.error('EmailJS Error:', error);
+          formStatus.textContent = '送信に失敗しました。お手数ですが、直接メールにてお問い合わせください。';
+          formStatus.className = 'form-status error';
+          submitBtn.disabled = false;
+          submitBtn.textContent = '送信する';
+        });
+    });
+  </script>
+
+</body>
+</html>
