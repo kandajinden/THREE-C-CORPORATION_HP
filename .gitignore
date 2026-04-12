@@ -1,0 +1,38 @@
+# =============================================================================
+# THREE-C CORPORATION HP リポジトリ .gitignore
+# 2026-04-12 作成（週次振り返り時の予防策）
+# =============================================================================
+
+# --- 秘密情報（最重要） ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*credentials*
+*secret*
+*.token
+.dev.vars
+
+# --- OS・IDE ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Node.js / Next.js ---
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- ログ ---
+*.log
+logs/
